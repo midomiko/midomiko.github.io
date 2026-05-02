@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>視覺小說</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0a0a0f;display:flex;align-items:center;justify-content:center;min-height:100vh;font-family:'Noto Serif TC',serif}
+#G{position:relative;overflow:hidden;background:#111;transform-origin:center center}
+#BG{position:absolute;inset:0;z-index:0}
+.GI{position:absolute;object-fit:contain;object-position:top left}
+#DB{position:absolute;left:0;right:0;min-height:36%;padding:15px 26px 30px;user-select:none;z-index:100}
+#DB.clickable{cursor:pointer}
+#NN{font-size:15px;color:#c8a45a;margin-bottom:7px;letter-spacing:1px}
+#DT{font-size:15px;color:#e8e4dc;line-height:1.8}
+.inline-arrow{display:inline-block;margin-left:5px;color:#c8a45a;font-family:'Noto Serif TC',serif}
+.inline-arrow img{vertical-align:middle}
+@keyframes ab{0%,100%{opacity:1;transform:translateY(0)}50%{opacity:.3;transform:translateY(4px)}}
+.ab-anim{animation:ab 1.1s ease-in-out infinite}
+#ARW{position:absolute;bottom:8px;right:16px;z-index:150;font-size:18px;color:#c8a45a;pointer-events:none;font-family:'Noto Serif TC',serif;display:none}
+#ARW.ab-anim{animation:ab 1.1s ease-in-out infinite}
+#CH{position:absolute;right:18px;bottom:14px;display:flex;flex-direction:column;gap:8px;align-items:flex-end;z-index:200}
+.cb{background:rgba(10,12,18,.9);border:1px solid #c8a45a;color:#c8a45a;font-family:'Noto Serif TC',serif;font-size:14px;padding:7px 20px;cursor:pointer;transition:all .2s}
+.cb:hover{background:#c8a45a;color:#0a0a0f}
+/* END: no built-in screen - creator defines their own ending */
+</style>
+</head>
+<body>
+<div id="G">
+  <div id="BG"></div>
+  <div id="DB"><div id="NN"></div><div id="DT"></div></div>
+  <span id="ARW"></span>
+  <div id="CH"></div>
+  <!-- no built-in END screen -->
+</div>
+<script>
+const SCENES=[{"id":"_aixw9h7","name":"鄉下","width":680,"height":480,"bgImg":"https://images.plurk.com/1Y5SAHUOYigbSngvXP9tSy.jpg ","bgColor":"#1a1a2a","bgMode":"cover","bgW":0,"bgH":0,"dialogues":[{"id":"_m2ji5h2","conditions":"","images":[],"showBox":true,"boxImg":"https://emos.plurk.com/2fb4c5552db3b43d27b2179d0afeef3c_w48_h48.png","boxPosition":"custom","boxX":150,"boxY":200,"boxW":400,"boxH":150,"npcName":"","text":"<span style=\"background-color: #fff; font-size: 18px; color: #000;\">～此處應有一陣優美的bgm，請自行腦補～</span><120f></120f><dlg_next>","arrowImg":"https://emos.plurk.com/2fb4c5552db3b43d27b2179d0afeef3c_w48_h48.png","arrowPos":"default","arrowX":0,"arrowY":0,"arrowWait":true},{"id":"_en4the3","conditions":"","images":[],"showBox":true,"boxImg":"","boxPosition":"middle","boxX":0,"boxY":0,"boxW":0,"boxH":0,"npcName":"","text":"在某個連蘑菇都很少見的鄉下小村落裡，住著一個很想吃好吃杜拜巧克力的小ㄐㄐ<br>\n然而，在這種鄉下地方別說杜拜巧克力這等走在時代尖端的夢幻逸品，就連七七乳加和滋露都是難得一見的奢侈品<br>\n無論哪個柑仔店都只能看到滿滿的足球巧克力，以及明明跟巧克力完全無關卻硬要冒充的難吃金幣","arrowImg":"","arrowPos":"afterText","arrowX":0,"arrowY":0,"arrowWait":true},{"id":"_jkduqwd","conditions":"","images":[],"showBox":true,"boxImg":"","boxPosition":"middle","boxX":0,"boxY":0,"boxW":0,"boxH":0,"npcName":"","text":"這天，小ㄐㄐ終於存夠了錢<br>\n她款款行囊，帶著鼓鼓又沉甸甸的錢包，以及鼓鼓但不沉甸甸的茶包<br>\n為了尋找傳說中的杜拜巧克力，踏上前往繁華大都市的旅程……<click><goto:_3d3b6zv>","arrowImg":"","arrowPos":"afterText","arrowX":0,"arrowY":0,"arrowWait":true}],"choices":[]},{"id":"_3d3b6zv","name":"火車","width":680,"height":480,"bgImg":"https://images.plurk.com/29eJsA3ASzCG2izGcTkGZZ.png","bgColor":"#1a1a2a","bgMode":"cover","bgW":0,"bgH":0,"dialogues":[{"id":"_qeysjih","conditions":"","images":[],"showBox":true,"boxImg":"https://emos.plurk.com/2fb4c5552db3b43d27b2179d0afeef3c_w48_h48.png","boxPosition":"custom","boxX":130,"boxY":200,"boxW":450,"boxH":150,"npcName":"","text":"<span style=\"background-color: #fff; font-size: 18px; color: #000;\">～此處應有一陣火車行駛的音效，請自行腦補～</span><120f></120f><dlg_next>","arrowImg":"https://emos.plurk.com/2fb4c5552db3b43d27b2179d0afeef3c_w48_h48.png","arrowPos":"default","arrowX":0,"arrowY":0,"arrowWait":true},{"id":"_xowlnsm","conditions":"","images":[],"showBox":true,"boxImg":"","boxPosition":"middle","boxX":0,"boxY":0,"boxW":0,"boxH":0,"npcName":"","text":"為了說不定會天價般昂貴的杜拜巧克力，小ㄐㄐ一路上非常保守的盡可能省錢<br>\n她搭上如今的年輕人都不屑搭的老舊小火車，車廂內一路顛簸搖晃彷彿四級地震令小ㄐㄐ非常不安","arrowImg":"","arrowPos":"afterText","arrowX":0,"arrowY":0,"arrowWait":true},{"id":"_gaday41","conditions":"","images":[],"showBox":true,"boxImg":"https://emos.plurk.com/2fb4c5552db3b43d27b2179d0afeef3c_w48_h48.png","boxPosition":"custom","boxX":50,"boxY":50,"boxW":0,"boxH":0,"npcName":"","text":"<font size=\"4\">轟轟……</font><120f></120f><dlg_next>","arrowImg":"https://emos.plurk.com/2fb4c5552db3b43d27b2179d0afeef3c_w48_h48.png","arrowPos":"afterText","arrowX":0,"arrowY":0,"arrowWait":true},{"id":"_01386re","conditions":"","images":[],"showBox":true,"boxImg":"https://emos.plurk.com/2fb4c5552db3b43d27b2179d0afeef3c_w48_h48.png","boxPosition":"custom","boxX":250,"boxY":250,"boxW":0,"boxH":0,"npcName":"","text":"<font size=\"4\">轟轟……</font><120f></120f><dlg_next>","arrowImg":"https://emos.plurk.com/2fb4c5552db3b43d27b2179d0afeef3c_w48_h48.png","arrowPos":"afterText","arrowX":0,"arrowY":0,"arrowWait":true},{"id":"_hz4qgi1","conditions":"","images":[],"showBox":true,"boxImg":"https://emos.plurk.com/2fb4c5552db3b43d27b2179d0afeef3c_w48_h48.png","boxPosition":"custom","boxX":150,"boxY":350,"boxW":500,"boxH":0,"npcName":"","text":"<font size=\"4\">哐啷……哐啷……</font><120f></120f><dlg_next>","arrowImg":"","arrowPos":"afterText","arrowX":0,"arrowY":0,"arrowWait":true},{"id":"_b75x5k4","conditions":"","images":[],"showBox":true,"boxImg":"https://emos.plurk.com/2fb4c5552db3b43d27b2179d0afeef3c_w48_h48.png","boxPosition":"custom","boxX":500,"boxY":130,"boxW":200,"boxH":0,"npcName":"","text":"<font size=\"4\">轟隆隆……</font><120f></120f><dlg_next>","arrowImg":"","arrowPos":"afterText","arrowX":0,"arrowY":0,"arrowWait":true},{"id":"_7smhtt4","conditions":"","images":[],"showBox":true,"boxImg":"","boxPosition":"middle","boxX":0,"boxY":0,"boxW":0,"boxH":0,"npcName":"","text":"小ㄐㄐ抓緊茶包與錢包<br>\n茶包柔軟充實的嬌小身軀與處變不驚的淡漠眼神<br>\n以及錢包硬梆梆沉甸甸的踏實感<br>\n總算是讓小ㄐㄐ稍稍感到些許安心\n","arrowImg":"","arrowPos":"afterText","arrowX":0,"arrowY":0,"arrowWait":true},{"id":"_4u71m8x","conditions":"","images":[],"showBox":true,"boxImg":"","boxPosition":"middle","boxX":0,"boxY":0,"boxW":0,"boxH":0,"npcName":"","text":"就在此時──\n","arrowImg":"","arrowPos":"afterText","arrowX":0,"arrowY":0,"arrowWait":true},{"id":"_msyz0ve","conditions":"","images":[{"id":"_5ectc75","src":"https://images.plurk.com/5vkSIWA7Vxr729nKmjF4Ar.png","x":370,"y":55,"w":0,"h":0,"zLayer":"below","includeTransparent":false,"conditions":"","clickEnabled":false,"clickSrc":"","clickTags":"","clickToggle":false,"clickX":0,"clickY":0,"clickW":0,"clickH":0,"hoverInEnabled":false,"hoverInSrc":"","hoverInTags":"","hoverInX":0,"hoverInY":0,"hoverInW":0,"hoverInH":0,"hoverOutEnabled":false,"hoverOutSrc":"","hoverOutTags":"","hoverOutX":0,"hoverOutY":0,"hoverOutW":0,"hoverOutH":0},{"id":"_1rf57ks","src":"https://images.plurk.com/2McC8KdzGSYrmjGHu5o4gC.png","x":66,"y":60,"w":400,"h":0,"zLayer":"below","includeTransparent":false,"conditions":"","clickEnabled":false,"clickSrc":"","clickTags":"","clickToggle":false,"clickX":0,"clickY":0,"clickW":0,"clickH":0,"hoverInEnabled":false,"hoverInSrc":"","hoverInTags":"","hoverInX":0,"hoverInY":0,"hoverInW":0,"hoverInH":0,"hoverOutEnabled":false,"hoverOutSrc":"","hoverOutTags":"","hoverOutX":0,"hoverOutY":0,"hoverOutW":0,"hoverOutH":0}],"showBox":true,"boxImg":"https://emos.plurk.com/2fb4c5552db3b43d27b2179d0afeef3c_w48_h48.png","boxPosition":"custom","boxX":80,"boxY":80,"boxW":430,"boxH":0,"npcName":"","text":"<font color=#000>ㄟ！我ㄌㄩ小公主啦，啊妳搭火車是要去幹嘛？</font>","arrowImg":"https://emos.plurk.com/2fb4c5552db3b43d27b2179d0afeef3c_w48_h48.png","arrowPos":"custom","arrowX":260,"arrowY":130,"arrowWait":true},{"id":"_nygxb91","conditions":"","images":[{"id":"_u28giml","src":"https://images.plurk.com/5vkSIWA7Vxr729nKmjF4Ar.png","x":370,"y":55,"w":0,"h":0,"zLayer":"below","includeTransparent":false,"conditions":"","clickEnabled":false,"clickSrc":"","clickTags":"","clickToggle":false,"clickX":0,"clickY":0,"clickW":0,"clickH":0,"hoverInEnabled":false,"hoverInSrc":"","hoverInTags":"","hoverInX":0,"hoverInY":0,"hoverInW":0,"hoverInH":0,"hoverOutEnabled":false,"hoverOutSrc":"","hoverOutTags":"","hoverOutX":0,"hoverOutY":0,"hoverOutW":0,"hoverOutH":0},{"id":"_3kcymy0","src":"https://images.plurk.com/769NQlwVSo9eh2gwLPB5nG.png","x":33,"y":196,"w":250,"h":0,"zLayer":"below","includeTransparent":false,"conditions":"","clickEnabled":false,"clickSrc":"","clickTags":"","clickToggle":false,"clickX":0,"clickY":0,"clickW":0,"clickH":0,"hoverInEnabled":false,"hoverInSrc":"","hoverInTags":"","hoverInX":0,"hoverInY":0,"hoverInW":0,"hoverInH":0,"hoverOutEnabled":false,"hoverOutSrc":"","hoverOutTags":"","hoverOutX":0,"hoverOutY":0,"hoverOutW":0,"hoverOutH":0},{"id":"_vwddq2x","src":"https://images.plurk.com/4Lvuvy70C8ydwGrcaEbYm7.png","x":199,"y":312,"w":350,"h":0,"zLayer":"below","includeTransparent":false,"conditions":"","clickEnabled":false,"clickSrc":"","clickTags":"","clickToggle":false,"clickX":0,"clickY":0,"clickW":0,"clickH":0,"hoverInEnabled":false,"hoverInSrc":"","hoverInTags":"","hoverInX":0,"hoverInY":0,"hoverInW":0,"hoverInH":0,"hoverOutEnabled":false,"hoverOutSrc":"","hoverOutTags":"","hoverOutX":0,"hoverOutY":0,"hoverOutW":0,"hoverOutH":0}],"showBox":true,"boxImg":"https://emos.plurk.com/2fb4c5552db3b43d27b2179d0afeef3c_w48_h48.png","boxPosition":"custom","boxX":230,"boxY":300,"boxW":430,"boxH":0,"npcName":"","text":"<font color=#000>我……我是鄉下的小ㄐㄐ<br>我要去繁華大都市買杜拜巧克力</font>","arrowImg":"https://emos.plurk.com/2fb4c5552db3b43d27b2179d0afeef3c_w48_h48.png","arrowPos":"custom","arrowX":475,"arrowY":350,"arrowWait":true},{"id":"_03v7gjx","conditions":"","images":[{"id":"_4gfpzft","src":"https://images.plurk.com/3V5uXvCjETdPenHwpOsrFY.png","x":370,"y":55,"w":0,"h":0,"zLayer":"below","includeTransparent":false,"conditions":"","clickEnabled":false,"clickSrc":"","clickTags":"","clickToggle":false,"clickX":0,"clickY":0,"clickW":0,"clickH":0,"hoverInEnabled":false,"hoverInSrc":"","hoverInTags":"","hoverInX":0,"hoverInY":0,"hoverInW":0,"hoverInH":0,"hoverOutEnabled":false,"hoverOutSrc":"","hoverOutTags":"","hoverOutX":0,"hoverOutY":0,"hoverOutW":0,"hoverOutH":0},{"id":"_q9eong2","src":"https://images.plurk.com/769NQlwVSo9eh2gwLPB5nG.png","x":33,"y":196,"w":250,"h":0,"zLayer":"below","includeTransparent":false,"conditions":"","clickEnabled":false,"clickSrc":"","clickTags":"","clickToggle":false,"clickX":0,"clickY":0,"clickW":0,"clickH":0,"hoverInEnabled":false,"hoverInSrc":"","hoverInTags":"","hoverInX":0,"hoverInY":0,"hoverInW":0,"hoverInH":0,"hoverOutEnabled":false,"hoverOutSrc":"","hoverOutTags":"","hoverOutX":0,"hoverOutY":0,"hoverOutW":0,"hoverOutH":0},{"id":"_b2n87ju","src":"https://images.plurk.com/24oVahAol6DbN4hCZ2MJm5.png","x":229,"y":7,"w":350,"h":0,"zLayer":"below","includeTransparent":false,"conditions":"","clickEnabled":false,"clickSrc":"","clickTags":"","clickToggle":false,"clickX":0,"clickY":0,"clickW":0,"clickH":0,"hoverInEnabled":false,"hoverInSrc":"","hoverInTags":"","hoverInX":0,"hoverInY":0,"hoverInW":0,"hoverInH":0,"hoverOutEnabled":false,"hoverOutSrc":"","hoverOutTags":"","hoverOutX":0,"hoverOutY":0,"hoverOutW":0,"hoverOutH":0}],"showBox":true,"boxImg":"https://emos.plurk.com/2fb4c5552db3b43d27b2179d0afeef3c_w48_h48.png","boxPosition":"custom","boxX":230,"boxY":12,"boxW":430,"boxH":0,"npcName":"","text":"<font color=#000>蛤為什麼她的立繪比本公主還精緻明明我才是<br>繪師搞什麼東西心態崩了不嘻嘻了累了不愛了</font>","arrowImg":"https://emos.plurk.com/2fb4c5552db3b43d27b2179d0afeef3c_w48_h48.png","arrowPos":"custom","arrowX":400,"arrowY":85,"arrowWait":true},{"id":"_encxkxd","conditions":"","images":[{"id":"_f2kpzf5","src":"https://images.plurk.com/60s20CEUewWsGW4YBV0E4e.png","x":370,"y":55,"w":0,"h":0,"zLayer":"below","includeTransparent":false,"conditions":"","clickEnabled":false,"clickSrc":"","clickTags":"","clickToggle":false,"clickX":0,"clickY":0,"clickW":0,"clickH":0,"hoverInEnabled":false,"hoverInSrc":"","hoverInTags":"","hoverInX":0,"hoverInY":0,"hoverInW":0,"hoverInH":0,"hoverOutEnabled":false,"hoverOutSrc":"","hoverOutTags":"","hoverOutX":0,"hoverOutY":0,"hoverOutW":0,"hoverOutH":0},{"id":"_roae9ag","src":"https://images.plurk.com/2McC8KdzGSYrmjGHu5o4gC.png","x":66,"y":60,"w":400,"h":0,"zLayer":"below","includeTransparent":false,"conditions":"","clickEnabled":false,"clickSrc":"","clickTags":"","clickToggle":false,"clickX":0,"clickY":0,"clickW":0,"clickH":0,"hoverInEnabled":false,"hoverInSrc":"","hoverInTags":"","hoverInX":0,"hoverInY":0,"hoverInW":0,"hoverInH":0,"hoverOutEnabled":false,"hoverOutSrc":"","hoverOutTags":"","hoverOutX":0,"hoverOutY":0,"hoverOutW":0,"hoverOutH":0},{"id":"_o1bharb","src":"https://images.plurk.com/769NQlwVSo9eh2gwLPB5nG.png","x":33,"y":196,"w":250,"h":0,"zLayer":"below","includeTransparent":false,"conditions":"","clickEnabled":false,"clickSrc":"","clickTags":"","clickToggle":false,"clickX":0,"clickY":0,"clickW":0,"clickH":0,"hoverInEnabled":false,"hoverInSrc":"","hoverInTags":"","hoverInX":0,"hoverInY":0,"hoverInW":0,"hoverInH":0,"hoverOutEnabled":false,"hoverOutSrc":"","hoverOutTags":"","hoverOutX":0,"hoverOutY":0,"hoverOutW":0,"hoverOutH":0}],"showBox":true,"boxImg":"https://emos.plurk.com/2fb4c5552db3b43d27b2179d0afeef3c_w48_h48.png","boxPosition":"custom","boxX":80,"boxY":60,"boxW":430,"boxH":0,"npcName":"","text":"<font color=#000>蛤笑死人了果然是鄉下來的土包子與其花錢吃那種<br>廚餘不如多讀點書吧大家都講</font><font color=#FAE344>繁</font><font color=#F5C755>☆</font><font color=#F0AB66>華</font><font color=#EB8F77>☆</font><font color=#E67388>大</font><font color=#E15799>☆</font><font color=#DC3BAA>都</font><font color=#D71FBB>☆</font><font color=#D203CC>市</font><br><font color=#000>難道鄉下連怎麼打星號都沒教嗎摳連喔！</font>","arrowImg":"https://emos.plurk.com/2fb4c5552db3b43d27b2179d0afeef3c_w48_h48.png","arrowPos":"custom","arrowX":260,"arrowY":130,"arrowWait":true},{"id":"_pfgf3y0","conditions":"","images":[{"id":"_239x1aw","src":"https://images.plurk.com/2QPGJiNjYvOJsqvtsfCSn6.png ","x":370,"y":55,"w":0,"h":0,"zLayer":"below","includeTransparent":false,"conditions":"","clickEnabled":false,"clickSrc":"","clickTags":"","clickToggle":false,"clickX":0,"clickY":0,"clickW":0,"clickH":0,"hoverInEnabled":false,"hoverInSrc":"","hoverInTags":"","hoverInX":0,"hoverInY":0,"hoverInW":0,"hoverInH":0,"hoverOutEnabled":false,"hoverOutSrc":"","hoverOutTags":"","hoverOutX":0,"hoverOutY":0,"hoverOutW":0,"hoverOutH":0},{"id":"_emigmsh","src":"https://images.plurk.com/ERBuFRVDK1Dnzmkfke1W0.png","x":200,"y":0,"w":300,"h":0,"zLayer":"below","includeTransparent":false,"conditions":"","clickEnabled":false,"clickSrc":"","clickTags":"","clickToggle":false,"clickX":0,"clickY":0,"clickW":0,"clickH":0,"hoverInEnabled":false,"hoverInSrc":"","hoverInTags":"","hoverInX":0,"hoverInY":0,"hoverInW":0,"hoverInH":0,"hoverOutEnabled":false,"hoverOutSrc":"","hoverOutTags":"","hoverOutX":0,"hoverOutY":0,"hoverOutW":0,"hoverOutH":0},{"id":"_43s6lp5","src":"https://images.plurk.com/769NQlwVSo9eh2gwLPB5nG.png","x":33,"y":196,"w":250,"h":0,"zLayer":"below","includeTransparent":false,"conditions":"","clickEnabled":false,"clickSrc":"","clickTags":"","clickToggle":false,"clickX":0,"clickY":0,"clickW":0,"clickH":0,"hoverInEnabled":false,"hoverInSrc":"","hoverInTags":"","hoverInX":0,"hoverInY":0,"hoverInW":0,"hoverInH":0,"hoverOutEnabled":false,"hoverOutSrc":"","hoverOutTags":"","hoverOutX":0,"hoverOutY":0,"hoverOutW":0,"hoverOutH":0}],"showBox":true,"boxImg":"https://emos.plurk.com/2fb4c5552db3b43d27b2179d0afeef3c_w48_h48.png","boxPosition":"custom","boxX":205,"boxY":30,"boxW":400,"boxH":0,"npcName":"","text":"<span style=\"font-size: 16px; color: #000;\">杜拜巧克力那種廚餘狗都不吃啦！</span>","arrowImg":"https://emos.plurk.com/2fb4c5552db3b43d27b2179d0afeef3c_w48_h48.png","arrowPos":"custom","arrowX":260,"arrowY":130,"arrowWait":true},{"id":"_zfx8kxp","conditions":"","images":[{"id":"_eaee7ye","src":"https://images.plurk.com/769NQlwVSo9eh2gwLPB5nG.png","x":33,"y":196,"w":250,"h":0,"zLayer":"below","includeTransparent":false,"conditions":"","clickEnabled":false,"clickSrc":"","clickTags":"","clickToggle":false,"clickX":0,"clickY":0,"clickW":0,"clickH":0,"hoverInEnabled":false,"hoverInSrc":"","hoverInTags":"","hoverInX":0,"hoverInY":0,"hoverInW":0,"hoverInH":0,"hoverOutEnabled":false,"hoverOutSrc":"","hoverOutTags":"","hoverOutX":0,"hoverOutY":0,"hoverOutW":0,"hoverOutH":0},{"id":"_zvdi5g3","src":"https://images.plurk.com/4Lvuvy70C8ydwGrcaEbYm7.png","x":199,"y":312,"w":350,"h":0,"zLayer":"below","includeTransparent":false,"conditions":"","clickEnabled":false,"clickSrc":"","clickTags":"","clickToggle":false,"clickX":0,"clickY":0,"clickW":0,"clickH":0,"hoverInEnabled":false,"hoverInSrc":"","hoverInTags":"","hoverInX":0,"hoverInY":0,"hoverInW":0,"hoverInH":0,"hoverOutEnabled":false,"hoverOutSrc":"","hoverOutTags":"","hoverOutX":0,"hoverOutY":0,"hoverOutW":0,"hoverOutH":0}],"showBox":true,"boxImg":"https://emos.plurk.com/2fb4c5552db3b43d27b2179d0afeef3c_w48_h48.png","boxPosition":"custom","boxX":230,"boxY":300,"boxW":430,"boxH":0,"npcName":"","text":"<font color=#000>怎麼這樣……<br>難道都市人都這麼不友善嗎……</font>","arrowImg":"https://emos.plurk.com/2fb4c5552db3b43d27b2179d0afeef3c_w48_h48.png","arrowPos":"custom","arrowX":475,"arrowY":350,"arrowWait":true},{"id":"_9mswebm","conditions":"","images":[{"id":"_53hwnbg","src":"https://images.plurk.com/769NQlwVSo9eh2gwLPB5nG.png","x":33,"y":196,"w":250,"h":0,"zLayer":"below","includeTransparent":false,"conditions":"","clickEnabled":false,"clickSrc":"","clickTags":"","clickToggle":false,"clickX":0,"clickY":0,"clickW":0,"clickH":0,"hoverInEnabled":false,"hoverInSrc":"","hoverInTags":"","hoverInX":0,"hoverInY":0,"hoverInW":0,"hoverInH":0,"hoverOutEnabled":false,"hoverOutSrc":"","hoverOutTags":"","hoverOutX":0,"hoverOutY":0,"hoverOutW":0,"hoverOutH":0},{"id":"_jd3v3s2","src":"https://images.plurk.com/4Lvuvy70C8ydwGrcaEbYm7.png","x":199,"y":312,"w":350,"h":0,"zLayer":"below","includeTransparent":false,"conditions":"","clickEnabled":false,"clickSrc":"","clickTags":"","clickToggle":false,"clickX":0,"clickY":0,"clickW":0,"clickH":0,"hoverInEnabled":false,"hoverInSrc":"","hoverInTags":"","hoverInX":0,"hoverInY":0,"hoverInW":0,"hoverInH":0,"hoverOutEnabled":false,"hoverOutSrc":"","hoverOutTags":"","hoverOutX":0,"hoverOutY":0,"hoverOutW":0,"hoverOutH":0}],"showBox":true,"boxImg":"https://emos.plurk.com/2fb4c5552db3b43d27b2179d0afeef3c_w48_h48.png","boxPosition":"custom","boxX":230,"boxY":300,"boxW":430,"boxH":0,"npcName":"","text":"<font color=#000>我只是想吃看看好吃的杜拜巧克力……<br>\n難道想體驗都市生活錯了嗎？</font>","arrowImg":"https://emos.plurk.com/2fb4c5552db3b43d27b2179d0afeef3c_w48_h48.png","arrowPos":"custom","arrowX":475,"arrowY":350,"arrowWait":true}],"choices":[]}];
+const START="_aixw9h7";
+const SW_DEF=[];
+const VR_DEF=[];
+let sw={},vr={},cur=null,di=0,textFF=false,noFF=false,textTimers=[],imgTimers=[],pendingNavAction=null,imgSM={},hoveredImgIdx=-1;
+let pendingClickSegs=null,pendingClickOnDone=null,currentPart1=null,currentPart2=null;
+SW_DEF.forEach(s=>{if(s)sw[s.num]=s.value;});
+VR_DEF.forEach(v=>{if(v)vr[v.num]=v.value;});
+
+function chk(d){
+  const raw=d.conditions||'';
+  if(!raw.trim())return true;
+  return raw.split('\\n').every(line=>{
+    line=line.trim();if(!line)return true;
+    let m;
+    if(m=line.match(/^@sw_(\d+):(on|off)$/i)){return m[2].toLowerCase()==='on'?sw[+m[1]]===true:sw[+m[1]]===false;}
+    if(m=line.match(/^@var_(d+)(==|!=|>=|<=|>|<)(-?d+)$/)){
+      const v=vr[+m[1]]??0,r=+m[3];
+      return m[2]==='=='?v==r:m[2]==='!='?v!=r:m[2]==='>'?v>r:m[2]==='>='?v>=r:m[2]==='<'?v<r:v<=r;
+    }
+    return true; // unknown line = skip (treat as met)
+  });
+}
+function findNext(scene,from){for(let i=from;i<scene.dialogues.length;i++)if(chk(scene.dialogues[i]))return i;return -1;}
+
+function applyBg(el,s){el.style.backgroundColor=s.bgColor||'#1a1a2a';const bg=s.bgImg||'';if(!bg){el.style.backgroundImage='none';return;}el.style.backgroundImage='url('+bg+')';const m=s.bgMode||'cover',bw=(s.bgW&&s.bgW>0)?s.bgW+'px':'auto',bh=(s.bgH&&s.bgH>0)?s.bgH+'px':'auto';if(m==='cover'){el.style.backgroundSize='cover';el.style.backgroundRepeat='no-repeat';el.style.backgroundPosition='center';}else if(m==='contain'){el.style.backgroundSize='contain';el.style.backgroundRepeat='no-repeat';el.style.backgroundPosition='center';}else if(m==='tile'){el.style.backgroundSize=bw+' '+bh;el.style.backgroundRepeat='repeat';el.style.backgroundPosition='top left';}else if(m==='single'){el.style.backgroundSize=bw+' '+bh;el.style.backgroundRepeat='no-repeat';el.style.backgroundPosition='top left';}}
+
+function applyBox(d,clickable){
+  const DB=document.getElementById('DB'),pos=d.boxPosition||'bottom';
+  DB.style.display='';
+  if(pos==='custom'){
+    const bx=d.boxX||0,by=d.boxY||0,bw=d.boxW>0?d.boxW+'px':'auto',bh=d.boxH>0?d.boxH+'px':'auto';
+    DB.style.cssText='position:absolute;z-index:100;padding:15px 26px 30px;user-select:none;left:'+bx+'px;top:'+by+'px;width:'+(bw==='auto'?'calc(100% - '+bx*2+'px)':bw)+';height:'+bh+';';
+  }else{
+    DB.style.cssText='position:absolute;left:0;right:0;min-height:36%;padding:15px 26px 30px;user-select:none;z-index:100;';
+    if(pos==='bottom'){DB.style.bottom='0';DB.style.top='auto';}
+    else if(pos==='top'){DB.style.top='0';DB.style.bottom='auto';}
+    else{DB.style.top='50%';DB.style.transform='translateY(-50%)';DB.style.bottom='auto';}
+  }
+  if(d.boxImg){DB.style.backgroundImage='url('+d.boxImg+')';DB.style.backgroundSize='100% 100%';DB.style.backgroundRepeat='no-repeat';}
+  else{if(pos==='middle'||pos==='custom')DB.style.background='rgba(0,0,0,.82)';else DB.style.background='linear-gradient('+(pos==='top'?'to bottom':'to top')+',rgba(0,0,0,.92) 0%,rgba(0,0,0,.55) 75%,transparent 100%)';}
+  DB.className=clickable?'clickable':'';
+  // onclick handled by delegated G handler below
+}
+
+function setArrow(d,isLast){
+  const ARW=document.getElementById('ARW'),DT=document.getElementById('DT');
+  const oldIA=DT.querySelector('.inline-arrow');if(oldIA)oldIA.remove();
+  if(isLast||!d.showBox){ARW.style.display='none';return;}
+  const aImg=d.arrowImg||'';
+  const arrowContent=aImg?'<img src="'+aImg+'" style="vertical-align:middle">':'▼';
+  const anim=aImg?'none':'ab 1.1s ease-in-out infinite';
+  const aPos=d.arrowPos||'default';
+  if(aPos==='afterText'){
+    ARW.style.display='none';
+    const span=document.createElement('span');
+    span.className='inline-arrow';
+    if(!aImg)span.classList.add('ab-anim');
+    span.innerHTML=arrowContent;DT.appendChild(span);
+  }else if(aPos==='custom'){
+    ARW.innerHTML=arrowContent;
+    ARW.style.cssText='position:absolute;left:'+(d.arrowX||0)+'px;top:'+(d.arrowY||0)+'px;bottom:auto;right:auto;z-index:150;font-size:18px;color:#c8a45a;pointer-events:none;display:block;animation:'+anim+';';
+  }else{
+    ARW.innerHTML=arrowContent;
+    ARW.style.cssText='position:absolute;bottom:8px;right:16px;z-index:150;font-size:18px;color:#c8a45a;pointer-events:none;display:block;animation:'+anim+';';
+  }
+}
+
+// Transparent pixel check using canvas
+function isClickOpaque(imgEl,e){
+  try{
+    const rect=imgEl.getBoundingClientRect();
+    const cx=e.clientX-rect.left,cy=e.clientY-rect.top;
+    if(cx<0||cy<0||cx>rect.width||cy>rect.height)return false;
+    const cv=document.createElement('canvas');
+    cv.width=imgEl.naturalWidth||imgEl.width||1;cv.height=imgEl.naturalHeight||imgEl.height||1;
+    const ctx=cv.getContext('2d');ctx.drawImage(imgEl,0,0);
+    const px=cx*cv.width/rect.width,py=cy*cv.height/rect.height;
+    return ctx.getImageData(Math.floor(px),Math.floor(py),1,1).data[3]>10;
+  }catch(err){return true;}
+}
+
+// ── Image state helpers (global scope) ─────────────────────────
+// ── @ condition parser (game runtime) ───────────────────────────
+function parseAtConf(raw){
+  const conf={conds:[],inFps:0,outFps:0,parallel:false};
+  (raw||'').split('\n').forEach(line=>{
+    line=line.trim();if(!line)return;
+    let m;
+    if(line==='@parallel'){conf.parallel=true;return;}
+    if(m=line.match(/^@in\s+fps=(\d+)$/i)){conf.inFps=+m[1];return;}
+    if(m=line.match(/^@out\s+fps=(\d+)$/i)){conf.outFps=+m[1];return;}
+    if(m=line.match(/^@sw_(\d+):(on|off)$/i)){conf.conds.push({type:'sw',num:+m[1],val:m[2].toLowerCase()==='on'});return;}
+    if(m=line.match(/^@var_(\\d+)(==|!=|>=|<=|>|<)(-?\\d+)$/)){conf.conds.push({type:'var',num:+m[1],op:m[2],val:+m[3]});}
+  });
+  return conf;
+}
+function checkAtConds(conds){
+  return conds.every(c=>{
+    if(c.type==='sw')return sw[c.num]===c.val;
+    const v=vr[c.num]??0;
+    return c.op==='=='?v==c.val:c.op==='!='?v!=c.val:c.op==='>'?v>c.val:c.op==='>='?v>=c.val:c.op==='<'?v<c.val:v<=c.val;
+  });
+}
+function showImgState(idx){
+  const s=imgSM[idx];if(!s)return;
+  const img=cur&&cur.dialogues[di]?cur.dialogues[di].images[idx]:null;if(!img)return;
+  const hidden=s.st==='hidden';
+  s.el.style.visibility=hidden?'hidden':'visible';
+  s.el.style.pointerEvents=hidden?'none':'auto';
+  let src=img.src,x=img.x,y=img.y,w=img.w,h=img.h;
+  if(s.st==='hoverOut'&&img.hoverOutEnabled&&img.hoverOutSrc){src=img.hoverOutSrc;x=img.hoverOutX||img.x;y=img.hoverOutY||img.y;w=img.hoverOutW||img.w;h=img.hoverOutH||img.h;}
+  else if(s.st==='clicked'&&img.clickEnabled&&img.clickSrc){src=img.clickSrc;x=img.clickX||img.x;y=img.clickY||img.y;w=img.clickW||img.w;h=img.clickH||img.h;}
+  else if(s.st==='hoverIn'&&img.hoverInEnabled&&img.hoverInSrc){src=img.hoverInSrc;x=img.hoverInX||img.x;y=img.hoverInY||img.y;w=img.hoverInW||img.w;h=img.hoverInH||img.h;}
+  if(s.el.src!==src)s.el.src=src;
+  s.el.style.left=x+'px';s.el.style.top=y+'px';
+  s.el.style.width=w>0?w+'px':'auto';s.el.style.height=h>0?h+'px':'auto';
+}
+function imgAppear(idx,s){
+  if(imgSM[idx]!==s||s.st!=='hidden')return;
+  const img=cur&&cur.dialogues[di]?cur.dialogues[di].images[idx]:null;if(!img)return;
+  s.st='base';showImgState(idx);
+  if(s.atConf.outFps>0){
+    s.outTimer=setTimeout(()=>{
+      if(imgSM[idx]!==s)return;
+      s.st='hidden';showImgState(idx);
+      if(s.parallelRaf){cancelAnimationFrame(s.parallelRaf);s.parallelRaf=null;}
+      if(hoveredImgIdx===idx)hoveredImgIdx=-1;
+    },s.atConf.outFps*1000/60);
+  }
+}
+
+
+function clearTT(){textTimers.forEach(t=>clearTimeout(t));textTimers=[];}
+function clearIT(){imgTimers.forEach(t=>clearTimeout(t));imgTimers=[];Object.values(imgSM).forEach(s=>{if(s.outTimer)clearTimeout(s.outTimer);if(s.parallelRaf)cancelAnimationFrame(s.parallelRaf);});imgSM={};hoveredImgIdx=-1;}
+
+// ── Evaluate <if> blocks using current sw/vr runtime state ──────
+function evalIf(text){
+  function evalCond(condStr){
+    const ms=condStr.match(/^sw_(\d+):(on|off)$/i);
+    if(ms){return ms[2].toLowerCase()==='on'?sw[+ms[1]]===true:sw[+ms[1]]===false;}
+    const mv=condStr.match(/^var_(\d+)(==|!=|>=|<=|>|<)(-?\d+)$/);
+    if(mv){const v=vr[+mv[1]]??0,r=+mv[3];return mv[2]==='=='?v==r:mv[2]==='!='?v!=r:mv[2]==='>'?v>r:mv[2]==='>='?v>=r:mv[2]==='<'?v<r:v<=r;}
+    return false;
+  }
+  function splitElse(inner){
+    let d=0;
+    for(let i=0;i<inner.length;i++){
+      if(inner.slice(i).match(/^<if\s/i))d++;
+      else if(inner.slice(i).match(/^<\/if>/i)){if(d===0)break;d--;}
+      else if(d===0&&inner.slice(i).match(/^<else>/i)){
+        const ei=inner.lastIndexOf('</else>');
+        return{a:inner.slice(0,i),b:inner.slice(i+6,ei>=0?ei:undefined)};
+      }
+    }
+    return{a:inner,b:''};
+  }
+  let out='',pos=0;
+  while(pos<text.length){
+    const rest=text.slice(pos);
+    const im=rest.match(/^([\s\S]*?)<if\s+([^>]+)>/i);
+    if(!im){out+=rest;break;}
+    out+=im[1];
+    const condTrue=evalCond(im[2].trim());
+    let start=pos+im[0].length,depth=1,i=start;
+    while(i<text.length&&depth>0){
+      if(text.slice(i).match(/^<if\s/i))depth++;
+      else if(text.slice(i).match(/^<\/if>/i))depth--;
+      if(depth>0)i++;else break;
+    }
+    const{a,b}=splitElse(text.slice(start,i));
+    out+=evalIf(condTrue?a:b);
+    pos=i+5;
+  }
+  return out;
+}
+// ── Replace <var_N> bare with current value ───────────────────
+function applyVarDisplay(text){
+  return text.replace(/<var_(\d+)>/gi,(_,n)=>String(vr[+n]??0));
+}
+// ── Preprocess: evaluate if-blocks + var display ─────────────
+function preprocess(raw){
+  return applyVarDisplay(evalIf(raw.replace(new RegExp('<script[\s\S]*?<'+'/script>','gi'),'')));
+}
+// ── Parse segments from preprocessed text ────────────────────
+// Groups: 1,2=delay 3=sw_num 4=sw_val 5=var_num 6=var_op 7=rMin 8=rMax 9=var_fixed 10=goto 11=dlg
+function parseSegments(raw){
+  const segs=[];
+  const re=/<(\d+)f>([\s\S]*?)<\/\1f>|<sw_(\d+):(on|off)>|<var_(\d+)([-+]?=)(?:"(-?\d+)\.\.(\-?\d+)"|(-?\d+\.?\d*))>|<goto:([^>]+)>|<dlg_next>|<dlg:(\d+)>|<url_self:([^>]+)>|<url:([^>]+)>|<click>/gi;
+  let last=0,m;
+  while((m=re.exec(raw))!==null){
+    if(m.index>last)segs.push({type:'text',delay:0,html:raw.slice(last,m.index)});
+    if(m[1]!==undefined)       segs.push({type:'text',delay:+m[1]*1000/60,html:m[2]});
+    else if(m[3]!==undefined)  segs.push({type:'sw',num:+m[3],val:m[4].toLowerCase()==='on'});
+    else if(m[5]!==undefined)  segs.push({type:'var',num:+m[5],op:m[6],rMin:m[7]!==undefined?+m[7]:null,rMax:m[8]!==undefined?+m[8]:null,val:m[9]!==undefined?+m[9]:0});
+    else if(m[10]!==undefined) segs.push({type:'goto',id:m[10]});
+    else if(m[0].toLowerCase()==='<dlg_next>') segs.push({type:'dlg_next'});
+    else if(m[11]!==undefined) segs.push({type:'dlg',idx:+m[11]-1});
+    else if(m[12]!==undefined) segs.push({type:'url',href:m[12],target:'_self'});
+    else if(m[13]!==undefined) segs.push({type:'url',href:m[13],target:'_blank'});
+    else if(m[0].toLowerCase()==='<click>') segs.push({type:'click'});
+    last=re.lastIndex;
+  }
+  if(last<raw.length)segs.push({type:'text',delay:0,html:raw.slice(last)});
+  return segs;
+}
+// ── Execute a single action segment ──────────────────────────
+function randInt(a,b){return Math.floor(Math.random()*(b-a+1))+a;}
+function execTextAction(seg){
+  if(seg.type==='sw'){
+    sw[seg.num]=seg.val;
+  }else if(seg.type==='var'){
+    const v=seg.rMin!==null?randInt(seg.rMin,seg.rMax):seg.val;
+    if(seg.op==='=')vr[seg.num]=v;
+    else if(seg.op==='+=')vr[seg.num]=(vr[seg.num]??0)+v;
+    else if(seg.op==='-=')vr[seg.num]=(vr[seg.num]??0)-v;
+  }else if(seg.type==='url'){
+    window.open(seg.href,seg.target||'_blank');
+  }else if(seg.type==='goto'){
+    const ns=SCENES.find(s=>s.id===seg.id);if(ns)gotoScene(ns.id);
+  }else if(seg.type==='dlg'){
+    jumpDlg(seg.idx);
+  }else if(seg.type==='dlg_next'){
+    advDlg();
+  }
+}
+function showText(html,onDone){
+  clearTT();pendingNavAction=null;
+  pendingClickSegs=null;pendingClickOnDone=null;currentPart1=null;currentPart2=null;
+  const DT=document.getElementById('DT');DT.innerHTML='';
+  runSegs(parseSegments(preprocess(html)),onDone);
+}
+function runSegs(segs,onDone){
+  const DT=document.getElementById('DT');
+  const clickIdx=segs.findIndex(s=>s.type==='click');
+  const part1=clickIdx>=0?segs.slice(0,clickIdx):segs;
+  const part2=clickIdx>=0?segs.slice(clickIdx+1):null;
+  currentPart1=part1;currentPart2=part2;pendingClickOnDone=onDone;
+  const lastTextIdx=part1.reduce((acc,s,i)=>s.type==='text'?i:acc,-1);
+  textFF=part1.some(s=>s.type==='text'&&s.delay>0);
+  let cum=0;
+  part1.forEach((seg,i)=>{
+    if(seg.type==='text'){
+      cum+=seg.delay;const c=cum;
+      const t=setTimeout(()=>{
+        const sp=document.createElement('span');sp.innerHTML=seg.html;
+        const ia=DT.querySelector('.inline-arrow');
+        if(ia)DT.insertBefore(sp,ia);else DT.appendChild(sp);
+        if(i===lastTextIdx){
+          textFF=false;
+          if(part2!==null){pendingClickSegs=part2;const d=cur&&cur.dialogues[di];if(d)setArrow(d,false);}
+          else{if(onDone)onDone();}
+        }
+      },c);
+      textTimers.push(t);
+    }else{
+      // All action tags (including dlg/dlg_next) execute immediately at cumulative delay
+      const c=cum;
+      const t=setTimeout(()=>execTextAction(seg),c);
+      textTimers.push(t);
+    }
+  });
+  if(lastTextIdx===-1){
+    textFF=false;
+    if(part2!==null){pendingClickSegs=part2;const d=cur&&cur.dialogues[di];if(d)setArrow(d,false);}
+    else{if(onDone)onDone();}
+  }
+}
+function gotoScene(id){const ns=SCENES.find(x=>x.id===id);if(ns)renderScene(ns);}
+function jumpDlg(idx){const ni=findNext(cur,idx);if(ni>=0){di=ni;renderDlg();}else showChoices();}
+function onDlgClick(){
+  if(textFF){
+    if(noFF)return;
+    const p1=currentPart1||[],p2=currentPart2,cb=pendingClickOnDone;
+    clearTT();textFF=false;pendingNavAction=null;
+    const DT=document.getElementById('DT');
+    let gotoSeg=null;
+    p1.forEach(seg=>{
+      if(seg.type==='text'){const sp=document.createElement('span');sp.innerHTML=seg.html;const ia=DT.querySelector('.inline-arrow');if(ia)DT.insertBefore(sp,ia);else DT.appendChild(sp);}
+      else if(seg.type==='goto'){if(!gotoSeg)gotoSeg=seg;}
+      else{execTextAction(seg);}
+    });
+    if(gotoSeg){execTextAction(gotoSeg);return;}
+    if(p2!==null){
+      pendingClickSegs=p2;pendingClickOnDone=cb;
+      const d=cur&&cur.dialogues[di];if(d)setArrow(d,false);
+      return;
+    }
+    return;
+  }
+  if(pendingClickSegs!==null){
+    const segs=pendingClickSegs,cb=pendingClickOnDone;
+    pendingClickSegs=null;pendingClickOnDone=null;currentPart1=null;currentPart2=null;
+    runSegs(segs,cb);return;
+  }
+  if(pendingNavAction){const nav=pendingNavAction;pendingNavAction=null;execTextAction(nav);return;}
+  advDlg();
+}
+
+
+function advDlg(){const next=findNext(cur,di+1);if(next>=0){di=next;renderDlg();}else showChoices();}
+
+function showChoices(){
+  const CH=document.getElementById('CH'),ARW=document.getElementById('ARW');
+  document.getElementById('DT').querySelectorAll('.inline-arrow').forEach(e=>e.remove());
+  ARW.style.display='none';CH.innerHTML='';
+  const choices=cur.choices||[];if(!choices.length)return; // no choices: freeze (creator defines ending)
+  choices.forEach(c=>{const b=document.createElement('button');b.className='cb';b.textContent=c.text||'繼續';b.onclick=()=>{const ns=SCENES.find(x=>x.id===c.target);if(ns)renderScene(ns);};CH.appendChild(b);});
+}
+
+function renderScene(s){
+  const G=document.getElementById('G');
+  G.style.width=(s.width||920)+'px';G.style.height=(s.height||320)+'px';
+  resize();applyBg(document.getElementById('BG'),s);
+  cur=s;di=findNext(s,0);if(di<0){showChoices();return;}renderDlg();
+}
+
+function renderDlg(){
+  const G=document.getElementById('G'),DB=document.getElementById('DB'),
+        NN=document.getElementById('NN'),ARW=document.getElementById('ARW'),CH=document.getElementById('CH');
+  G.querySelectorAll('.GI').forEach(e=>e.remove());CH.innerHTML='';
+  clearTT();clearIT();textFF=false;noFF=false;pendingNavAction=null;
+  // Remove inline arrows
+  document.getElementById('DT').querySelectorAll('.inline-arrow').forEach(e=>e.remove());
+
+  const d=cur.dialogues[di];
+  const isLast=findNext(cur,di+1)<0;
+
+  // Build state machine for each image
+  d.images.forEach((img,origIdx)=>{
+    if(!img.src)return;
+    const el=document.createElement('img');
+    el.className='GI';el.src=img.src;el.dataset.imgIdx=origIdx;
+    const zBase=img.zLayer==='above'?110:10;
+    el.style.cssText='left:'+img.x+'px;top:'+img.y+'px;width:'+(img.w>0?img.w+'px':'auto')+';height:'+(img.h>0?img.h+'px':'auto')+';z-index:'+(zBase+origIdx)+';visibility:hidden;'+(img.clickEnabled?'cursor:pointer;':'');
+    G.insertBefore(el,DB);
+    const atConf=parseAtConf(img.conditions||'');
+    const s={el,st:'hidden',atConf,outTimer:null,parallelRaf:null};
+    imgSM[origIdx]=s;
+    const initMet=atConf.conds.length===0||checkAtConds(atConf.conds);
+    if(initMet){
+      if(atConf.inFps>0){const t=setTimeout(()=>imgAppear(origIdx,s),atConf.inFps*1000/60);imgTimers.push(t);}
+      else imgAppear(origIdx,s);
+    }
+    if(atConf.parallel){
+      let prev=initMet;
+      function tick(){
+        if(imgSM[origIdx]!==s)return;
+        const now=checkAtConds(atConf.conds);
+        if(now&&!prev){prev=true;if(atConf.inFps>0){const t=setTimeout(()=>imgAppear(origIdx,s),atConf.inFps*1000/60);imgTimers.push(t);}else imgAppear(origIdx,s);}
+        else if(!now&&prev){prev=false;if(s.outTimer){clearTimeout(s.outTimer);s.outTimer=null;}s.st='hidden';showImgState(origIdx);if(hoveredImgIdx===origIdx)hoveredImgIdx=-1;}
+        s.parallelRaf=requestAnimationFrame(tick);
+      }
+      s.parallelRaf=requestAnimationFrame(tick);
+    }
+  });
+
+  // noFF: fast-forward blocked when any image uses @parallel
+  noFF=d.images.some(img=>img&&img.conditions&&img.conditions.includes('@parallel'));
+
+  if(d.showBox){
+    const hasClick=d.text&&d.text.toLowerCase().includes('<click>');
+    applyBox(d,!isLast||hasClick);
+    NN.textContent=d.npcName||'';
+    showText(d.text,()=>{setArrow(d,isLast&&!pendingClickSegs);if(isLast&&!pendingClickSegs)showChoices();});
+    if(d.arrowWait===false) setArrow(d,isLast&&!hasClick);
+    if(isLast&&!hasClick)showChoices();
+  }else{
+    DB.style.cssText='display:none';DB.className='';DB.onclick=null;
+    NN.textContent='';document.getElementById('DT').innerHTML='';
+    ARW.style.display='none';
+    // Still process tags even when box is hidden.
+    // Since there's no clickable box, nav/click tags auto-fire after completion.
+    showText(d.text,()=>{
+      if(pendingClickSegs!==null){
+        const segs=pendingClickSegs,cb=pendingClickOnDone;
+        pendingClickSegs=null;pendingClickOnDone=null;currentPart1=null;currentPart2=null;
+        runSegs(segs,cb);
+      }else if(pendingNavAction){
+        const nav=pendingNavAction;pendingNavAction=null;execTextAction(nav);
+      }else if(isLast){
+        showChoices();
+      }else{
+        advDlg();
+      }
+    });
+  }
+}
+
+function showEnd(){/* no-op: creator defines own ending */}
+function resize(){if(!cur)return;const G=document.getElementById('G'),w=cur.width||920,h=cur.height||320,s=Math.min(window.innerWidth/w,window.innerHeight/h,1);G.style.transform='scale('+s+')';}
+window.addEventListener('resize',resize);
+
+// ── Delegated interaction handlers (click, hover) ───────────────
+(function(){
+  const G=document.getElementById('G');
+  function inRect(el,e){const r=el.getBoundingClientRect();return e.clientX>=r.left&&e.clientX<=r.right&&e.clientY>=r.top&&e.clientY<=r.bottom;}
+  function sortedGI(){return Array.from(G.querySelectorAll('.GI')).map(el=>({el,z:+el.style.zIndex||0})).sort((a,b)=>b.z-a.z);}
+  function execTags(tags){if(tags)parseSegments(preprocess(tags)).forEach(seg=>{if(seg.type!=='text')execTextAction(seg);});}
+  function topOpaqueImg(e){
+    for(const{el}of sortedGI()){
+      if(el.style.visibility==='hidden')continue;
+      if(!inRect(el,e))continue;
+      const idx=+el.dataset.imgIdx;
+      const img=cur&&cur.dialogues[di]?cur.dialogues[di].images[idx]:null;if(!img)continue;
+      if(!img.includeTransparent&&!isClickOpaque(el,e))continue;
+      return idx;
+    }
+    return -1;
+  }
+
+  // ── Hover tracking ──────────────────────────────────────────────
+  function handleHoverLeave(idx){
+    const s=imgSM[idx];const img=cur&&cur.dialogues[di]?cur.dialogues[di].images[idx]:null;
+    if(!s||!img||s.st==='hidden')return;
+    if(img.hoverOutEnabled){s.st='hoverOut';showImgState(idx);execTags(img.hoverOutTags);}
+    else if(s.st==='hoverIn'){s.st='base';showImgState(idx);}
+  }
+  function handleHoverEnter(idx){
+    const s=imgSM[idx];const img=cur&&cur.dialogues[di]?cur.dialogues[di].images[idx]:null;
+    if(!s||!img||s.st==='hidden'||s.st==='clicked')return;
+    if(img.hoverInEnabled){s.st='hoverIn';showImgState(idx);execTags(img.hoverInTags);}
+  }
+  G.addEventListener('mousemove',function(e){
+    if(!cur)return;
+    const newHov=topOpaqueImg(e);
+    if(newHov!==hoveredImgIdx){
+      if(hoveredImgIdx>=0)handleHoverLeave(hoveredImgIdx);
+      if(newHov>=0)handleHoverEnter(newHov);
+      hoveredImgIdx=newHov;
+    }
+  });
+  G.addEventListener('mouseleave',function(){
+    if(hoveredImgIdx>=0){handleHoverLeave(hoveredImgIdx);hoveredImgIdx=-1;}
+  });
+
+  // ── Click handler ───────────────────────────────────────────────
+  G.addEventListener('click',function(e){
+    if(e.target.closest('#CH'))return;
+    const DB=document.getElementById('DB');
+    const dbZ=100;
+    const sorted=sortedGI();
+    let dbChecked=false;
+    function tryDB(){if(!dbChecked){dbChecked=true;if(DB.classList.contains('clickable')&&inRect(DB,e)){onDlgClick();return true;}}return false;}
+    for(const{el,z}of sorted){
+      if(!dbChecked&&z<dbZ&&tryDB())return;
+      if(!inRect(el,e))continue;
+      const origIdx=+el.dataset.imgIdx;
+      const img=cur&&cur.dialogues[di]?cur.dialogues[di].images[origIdx]:null;if(!img)continue;
+      const opaque=img.includeTransparent||isClickOpaque(el,e);
+      if(!opaque)continue;
+      const s=imgSM[origIdx];
+      if(!s||s.st==='hidden')continue;
+      // Click toggle: re-click restores
+      if(s.st==='clicked'&&img.clickToggle){
+        s.st=hoveredImgIdx===origIdx&&img.hoverInEnabled?'hoverIn':'base';
+        showImgState(origIdx);return;
+      }
+      if(img.clickEnabled){
+        s.st='clicked';showImgState(origIdx);execTags(img.clickTags);return;
+      }
+      return; // opaque, no click interaction – absorb
+    }
+    if(!dbChecked)tryDB();
+  });
+})();
+
+
+renderScene(SCENES.find(s=>s.id===START)||SCENES[0]);
+</script>
+</body>
+</html>|SCENES[0]);
+</script>
+</body>
+</html>
